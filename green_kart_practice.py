@@ -2,8 +2,6 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-
-
 class GreenKart:
     def search_product(self,driver):
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
