@@ -16,6 +16,7 @@ class GreenKart:
             product.find_element(By.XPATH,".//button").click()
             time.sleep(1)
         product_count = len(products)
+        print(f"Total No of Products displayed - {product_count}")
         assert product_count > 2
     def cart_button(self,driver):
         cart_btn = driver.find_element(By.XPATH,"//img[@alt='Cart']")
