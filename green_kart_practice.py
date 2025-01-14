@@ -24,7 +24,22 @@ class GreenKart:
         time.sleep(1)
         proceed_checkout = driver.find_element(By.XPATH,"//button[normalize-space()='PROCEED TO CHECKOUT']")
         proceed_checkout.click()
-        time.sleep(1)    
+        time.sleep(1)   
+        prices = driver.find_elements(By.CSS_SELECTOR,"tr td:nth-child(5) p") 
+        sum = 0
+        for price in prices:
+            sum = sum + int(price.text)
+        print(f"total price of items - {sum}")
+        total_amount = int(driver.find_element(By.XPATH,"//span[@class='discountAmt']").text)
+        assert total_amount == sum , f"Assertion got Failed"
+        discount_text = driver.find_element(By.XPATH,"//b[normalize-space()='Total After Discount :']").text
+        numeric_value = discount_text.split(':')[-1].strip()
+        discount_amount = int(numeric_value)
+        print(discount_amount)
+
+
+
+  
         promo_code = driver.find_element(By.XPATH,"//input[@placeholder='Enter promo code']")
         promo_code.send_keys("rahulshettyacademy")
         promo_btn = driver.find_element(By.XPATH,"//button[@class = 'promoBtn']")
