@@ -32,19 +32,20 @@ class GreenKart:
         print(f"total price of items - {sum}")
         total_amount = int(driver.find_element(By.XPATH,"//span[@class='discountAmt']").text)
         assert total_amount == sum , f"Assertion got Failed"
-        discount_text = driver.find_element(By.XPATH,"//b[normalize-space()='Total After Discount :']").text
-        numeric_value = discount_text.split(':')[-1].strip()
-        discount_amount = int(numeric_value)
-        print(discount_amount)
-
-
-
-  
         promo_code = driver.find_element(By.XPATH,"//input[@placeholder='Enter promo code']")
         promo_code.send_keys("rahulshettyacademy")
         promo_btn = driver.find_element(By.XPATH,"//button[@class = 'promoBtn']")
         promo_btn.click()
         time.sleep(10)
+        discounted_price = float(driver.find_element(By.CSS_SELECTOR,".discountAmt").text)
+        discounted_price != total_amount , f"Discount Code Error"
+        print(f"Total Price is - {total_amount} - Discounted Price is - {discounted_price}" )
+        discount_per = driver.find_element(By.CSS_SELECTOR,".discountPerc")
+        discount_per_text = discount_per.text
+    
+        expected_discount_per = "10%"
+        assert discount_per_text == expected_discount_per, f"Expected {expected_discount_per}, but got {discount_per_text}"
+        print(f"Assertion Passed - Discount Percentage is {discount_per_text}")
 driver = webdriver.Chrome()
 driver.maximize_window()
 try:
