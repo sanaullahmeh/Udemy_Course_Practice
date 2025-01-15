@@ -2,6 +2,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+expected_list = ['Cauliflower - 1 Kg', 'Carrot - 1 Kg', 'Capsicum', 'Cashews - 1 Kg']
+actual_list = []
 class GreenKart:
     def search_product(self,driver):
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
@@ -13,8 +15,13 @@ class GreenKart:
         time.sleep(2)
         products = driver.find_elements(By.XPATH,"//div[@class='products']/div")
         for product in products:
+            actual_list.append(product.find_element(By.XPATH,".//h4").text)
             product.find_element(By.XPATH,".//button").click()
             time.sleep(1)
+        assert expected_list == actual_list ,f"Actual List is not same as Expected"
+        print(actual_list)
+        
+            
         product_count = len(products)
         print(f"Total No of Products displayed - {product_count}")
         assert product_count > 2
@@ -46,6 +53,7 @@ class GreenKart:
         expected_discount_per = "10%"
         assert discount_per_text == expected_discount_per, f"Expected {expected_discount_per}, but got {discount_per_text}"
         print(f"Assertion Passed - Discount Percentage is {discount_per_text}")
+    
 driver = webdriver.Chrome()
 driver.maximize_window()
 try:
