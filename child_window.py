@@ -9,7 +9,6 @@ class ChildWindows:
         title = driver.title
         print(title)
         windows_opened = driver.window_handles
-
         driver.switch_to.window(windows_opened[1])
         print(driver.find_element(By.TAG_NAME,"h3").text)
         title_two = driver.title
@@ -19,7 +18,15 @@ class ChildWindows:
         time.sleep(1)
         assert "Opening a new window" in (driver.find_element(By.TAG_NAME,"h3").text)
         print("Assertion Passed")
-driver = webdriver.Chrome()
+
+#headless Mode Settings
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")  
+options.add_argument("--disable-gpu")  
+options.add_argument("--window-size=1920,1080")
+
+
+driver = webdriver.Chrome(options=options)
 driver.maximize_window()
 try:
     Run = ChildWindows()
