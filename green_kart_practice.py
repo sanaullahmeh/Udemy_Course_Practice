@@ -19,7 +19,7 @@ class GreenKart:
             product.find_element(By.XPATH,".//button").click()
             time.sleep(1)
         assert expected_list == actual_list ,f"Actual List is not same as Expected"
-        print(actual_list)
+        print(f"List of Products - {actual_list}")
         
             
         product_count = len(products)
@@ -31,6 +31,7 @@ class GreenKart:
         time.sleep(1)
         proceed_checkout = driver.find_element(By.XPATH,"//button[normalize-space()='PROCEED TO CHECKOUT']")
         proceed_checkout.click()
+        driver.save_screenshot("screen.png")
         time.sleep(1)   
         prices = driver.find_elements(By.CSS_SELECTOR,"tr td:nth-child(5) p") 
         sum = 0
@@ -49,7 +50,6 @@ class GreenKart:
         print(f"Total Price is - {total_amount} - Discounted Price is - {discounted_price}" )
         discount_per = driver.find_element(By.CSS_SELECTOR,".discountPerc")
         discount_per_text = discount_per.text
-    
         expected_discount_per = "10%"
         assert discount_per_text == expected_discount_per, f"Expected {expected_discount_per}, but got {discount_per_text}"
         print(f"Assertion Passed - Discount Percentage is {discount_per_text}")
