@@ -50,7 +50,6 @@ class PracticeProject:
         print("Complete Flow Automated")
 
 
-
 driver = webdriver.Chrome()
 driver.maximize_window()
 try:
