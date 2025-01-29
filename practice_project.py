@@ -44,12 +44,9 @@ class PracticeProject:
 
         confirmation_message = driver.find_element(By.CSS_SELECTOR,".alert-success").text
         assert "Success! Thank you!" in confirmation_message ,f"Order not submitted"
-
         time.sleep(2)
-
         print("Complete Flow Automated")
-
-
+        
 driver = webdriver.Chrome()
 driver.maximize_window()
 try:
