@@ -7,7 +7,6 @@ actual_list = []
 class GreenKart:
     def search_product(self,driver):
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
-        time.sleep(1)
         title = driver.title
         print(f'title of the page is - {title}')
         search_box = driver.find_element(By.CSS_SELECTOR, ".search-keyword")
